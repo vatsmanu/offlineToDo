@@ -4,13 +4,20 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
-1. Install dependencies
+1. Clone the repo
+
+   ```bash
+   git clone https://github.com/your-username/MyTodoApp.git
+   cd MyTodoApp
+   ```
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the app
 
    ```bash
    npx expo start
@@ -23,7 +30,33 @@ In the output, you'll find options to open the app in a
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## How It Works
+State Management: The useTasks.ts custom hook is the heart of the application. It manages the tasks array, syncing status, and network connectivity.
+
+Offline Functionality:
+
+When the app starts, it loads tasks from AsyncStorage.
+
+Any changes (add, edit, delete, toggle) are immediately saved back to AsyncStorage.
+
+New tasks created offline are marked as isLocal (in a more advanced version) for later syncing.
+
+Online Syncing:
+
+The app uses NetInfo to listen for network state changes.
+
+When the device reconnects to the internet, the syncTasks function is triggered.
+
+For simplicity, the mock API is fully re-fetched and the local state is updated. In a real-world scenario, you would implement a more sophisticated merge strategy to handle local-only changes.
+
+UI Rendering:
+
+The HomeScreen.tsx component uses the useTasks hook to get the latest data.
+
+Two FlatList components are used to display tasks, filtered into "Pending" and "Completed" lists.
+
+
+
 
 ## Get a fresh project
 

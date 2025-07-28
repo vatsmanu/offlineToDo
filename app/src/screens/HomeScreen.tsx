@@ -64,8 +64,6 @@ export default function HomeScreen () {
   const pendingTasks: Task[] = tasks.filter(task => !task.completed);
   const completedTasks: Task[] = tasks.filter(task => task.completed);
 
-  console.log(':::TSK', tasks);
-
   const handleAddTask = () => {
     if (newTaskTitle.trim()) {
       addTask(newTaskTitle, newTaskDescription);
